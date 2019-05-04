@@ -55,7 +55,7 @@ public class Control extends HttpServlet {
 		
 		String jsp = "/list.jsp"; //página de inicio tras loguearse
 		//Comprobamos si existe usuario "Logueado"
-		Usuario usuario = (Usuario)request.getSession().getAttribute("USUARIO");
+		Usuario usuario = (Usuario)request.getSession().getAttribute("USUARIO_LOGED");
 		
 		if (usuario != null) {
 			//Cogemos el parámetro que llega para identificar la acción a realizar
@@ -67,6 +67,7 @@ public class Control extends HttpServlet {
 									
 		}else { //No se está "Logueado"
 			jsp="/index.jsp";
+			request.setAttribute("MSG", "Acceso restringido");
 		}
 		
 		request.getRequestDispatcher(jsp).forward(request, response);

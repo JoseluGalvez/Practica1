@@ -17,13 +17,13 @@ public class DeleteAction extends Action {
 		String jsp ="/list.jsp";
 		System.out.println("Entro en DeleteAction...");
 		
-		String name = request.getParameter("nombre");
+		String nombre = request.getParameter("nombre");
 				
 		//Recupero la lista de usuarios con su "casting" correspondiente.
 		Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
 		
 		if (usuarios != null) {
-			usuarios.remove(name);
+			usuarios.remove(nombre);
 		}
 		
 		return jsp;

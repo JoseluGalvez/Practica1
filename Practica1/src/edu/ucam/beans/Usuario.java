@@ -2,25 +2,58 @@ package edu.ucam.beans;
 
 public class Usuario {
 
+	private String idUsu;
 	private String name;
+	private String surname;
 	private String pass;
-
-	public Usuario(String name, String pass) {
+	
+	public Usuario(String idUsu, String name, String surname, String pass) {
 		super();
+		this.idUsu = idUsu;
 		this.name = name;
+		this.surname = surname;
 		this.pass = pass;
 	}
 	
+	public Usuario(String idUsu, String name, String pass) {
+		super();
+		this.idUsu = idUsu;
+		this.name = name;
+		this.pass = pass;
+	}
+
+	public String getIdUsu() {
+		return idUsu;
+	}
+
+	public void setIdUsu(String idUsu) {
+		this.idUsu = idUsu;
+	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
 	public String getPass() {
 		return pass;
 	}
+
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
+
+
+	
 }

@@ -10,25 +10,31 @@
 <title>MODIFICAR</title>
 </head>
 <body>
-
+<%@ include file="cabecera.jsp"%>
 
 <%
 //Recuperamos del contexto la lista de los usuarios
 	Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
 //recupero el usuario a modificar
-	Usuario usuario = usuarios.get(request.getParameter("nombre"));
-	
+	Usuario usuario = usuarios.get(request.getParameter("idUsu"));
 %>
 <br>
 	<form action="Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATE"/>
-	<!-- disabled hace que no se modifique el campo pero envía NULL como valor -->
+	<input type="hidden" name="nombre" value="<%= usuario.getIdUsu() %>"/>
 	<fieldset style="background:#ffe1e1;">
 	<legend>MODIFICAR</legend>
 	<p>
-	<label for="nombre">Nombre usuario</label><br>
-	<input type="text" name="nombre" id="nombre" value="<%= usuario.getName() %>" readonly="readonly"/>
+	<label for="id">Nick: <%= usuario.getIdUsu() %></label>
+	</p>
+	<p>
+	<label for="name">Nombre a modificar:</label><br>
+	<input type="text" name="name" id="name" value="<%= usuario.getName() %>"/>
+	</p>
+	<p>
+	<label for="surname">Apellidos a modificar:</label><br>
+	<input type="text" name="surname" id="surname" value="<%= usuario.getSurname() %>"/>
 	</p>
 	<p>
 	<label for="contrasena">Contraseña a modificar:</label><br>

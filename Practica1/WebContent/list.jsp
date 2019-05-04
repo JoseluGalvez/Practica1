@@ -10,30 +10,41 @@
 <title>LISTA</title>
 </head>
 <body>
+<%@ include file="cabecera.jsp"%>
 <%
 	//Intentamos recuperar el usuario que ha iniciado sesión.
-	Usuario user = (Usuario) session.getAttribute("USUARIO");
+	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
 
 %>
-Bienvenido, <%= user.getName() %>!<br>
+Bienvenido, <%= user.getIdUsu() %>!<br>
 	<form action="Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADD"/>
 	<fieldset style="background:#feffe1;">
-		<legend>USUARIO</legend>
+		<legend>NUEVO USUARIO</legend>
 		<p>
-		<label for="nombre">Nombre usuario nuevo: </label>
-		<input type="text" name="nombre" id="nombre" />
+		<label for="nombre">*Nick usuario nuevo: </label>
+		<input type="text" name="nombre" id="nombre" required/>
 		</p>
 		<p>
-		<label for="contrasena">Contraseña usuario nuevo: </label>
-		<input type="text" name="pass" id="pass" />
+		<label for="contrasena">*Contraseña usuario nuevo: </label>
+		<input type="text" name="pass" id="pass" required/>
+		</p>
+		<p>
+		<label for="name">Nombre: </label>
+		<input type="text" name="name" id="name" value=""/>
+		</p>
+		<p>
+		<label for="surname">Apellidos: </label>
+		<input type="text" name="surname" id="surname" value=""/>
 		</p>
 		</fieldset>
 		<p>
 		<input type="submit" value="AÑADIR">
 		</p>
-	</form><br><br>
+	</form>
+	<h6>Los campos marcados con '*' son obligatorios.</h6>
+	<br><br>
 
 <%
 //Recuperamos del contexto todos los usuarios
@@ -45,9 +56,9 @@ Bienvenido, <%= user.getName() %>!<br>
 		for(Enumeration e = usuarios.elements(); e.hasMoreElements();){
 			usuario = (Usuario)e.nextElement();
 			
-			out.println("<input type=\"button\" value=\"x\" onclick=\"window.location('Control?ACTION_ID=DELETE&nombre="+usuario.getName()+"')\" />"+"  "+ usuario.getName()
-				+", contraseña: "+ usuario.getPass()+" "
-				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"\">  Modificar</a><br>");
+			out.println("<input type=\"button\" value=\"x\" onclick=\"window.location('Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"')\" />"+"  ["+ usuario.getIdUsu()
+				+"], Nombre: "+usuario.getName()+", Apellidos: "+usuario.getSurname()+" "
+				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\">  Modificar</a><br>");
 		}
 	}else{
 		out.println("   - = No hay usuarios. = -");
