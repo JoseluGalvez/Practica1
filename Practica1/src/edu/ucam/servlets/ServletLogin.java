@@ -30,6 +30,13 @@ public class ServletLogin extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		super.init();
+		// Inicializo contadores que definen Id de finca y cultivo y guardo en
+		// contexto para que sean accesible desde todas las conexiones de usuarios
+		int contFin = 01;
+		int contCul = 01;
+		getServletContext().setAttribute("ATR_CONTFIN", contFin);
+		getServletContext().setAttribute("ATR_CONTCUL", contCul);
+
 	//Creamos el primer usuario Administrador para poder acceder
 		String idUsu = "admin";
 
@@ -65,7 +72,7 @@ public class ServletLogin extends HttpServlet {
 		    		// Usuario y pass correctos
 		    		Usuario user = usuarios.get(idUsu);
 		    		request.getSession().setAttribute("USUARIO_LOGED", user);
-		    		jsp = "/list.jsp"; //jsp de respuesta Logueado
+		    		jsp = "/principal.jsp"; //jsp de respuesta Logueado
 		    	}else {
 					request.setAttribute("MSG", "Contraseña incorrecta");
 		    	}

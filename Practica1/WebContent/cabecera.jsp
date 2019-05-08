@@ -23,6 +23,13 @@ h1{
 </head>
 <body>
 <h1>- = FINCAS Y CULTIVOS = -</h1><br>
+<%
+		//Si recibimos un mensaje lo ponemos debajo de la cabecera,
+		//encima del formulario.
+		if (request.getAttribute("MSG")!=null){
+			out.println(request.getAttribute("MSG")+"<br>");
+		}
+%>
 </body>
 </html>
 

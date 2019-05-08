@@ -31,8 +31,13 @@ public class AddAction extends Action {
 			request.getServletContext().setAttribute("ATR_USUARIOS", usuarios);
 		}
 		
-		// Añado a la lista el usuario creado con los parámetros recibidos (atributos)
-		usuarios.put(idUsu, usuario);
+		// Comprobamos si existe ese ID
+	    if(usuarios.containsKey(idUsu)) {
+			request.setAttribute("MSG", "Nick en uso, escriba otro diferente.");
+	    }else {
+			// Añado a la lista el usuario creado con los parámetros recibidos (atributos)
+			usuarios.put(idUsu, usuario);
+	    }
 		return jsp;
 	}
 

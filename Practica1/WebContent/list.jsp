@@ -14,9 +14,8 @@
 <%
 	//Intentamos recuperar el usuario que ha iniciado sesión.
 	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
-
 %>
-Bienvenido, <%= user.getIdUsu() %>!<br>
+<label ALIGN="RIGHT">Conectado como: <%= user.getIdUsu() %></label><br>
 	<form action="Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADD"/>
@@ -38,12 +37,12 @@ Bienvenido, <%= user.getIdUsu() %>!<br>
 		<label for="surname">Apellidos: </label>
 		<input type="text" name="surname" id="surname" value=""/>
 		</p>
+		<h6>Los campos marcados con * son obligatorios.</h6>
 		</fieldset>
 		<p>
 		<input type="submit" value="AÑADIR">
 		</p>
 	</form>
-	<h6>Los campos marcados con '*' son obligatorios.</h6>
 	<br><br>
 
 <%

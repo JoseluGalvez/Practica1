@@ -1,14 +1,14 @@
 package edu.ucam.beans;
 
 public class Cultivo {
-	private int id;
+	private String id;
 	private String description;
 	
-		public int getId() {
+		public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -20,7 +20,7 @@ public class Cultivo {
 		this.description = description;
 	}
 
-	public Cultivo(int id, String description) {
+	public Cultivo(String id, String description) {
 		super();
 		this.id = id;
 		this.description = description;

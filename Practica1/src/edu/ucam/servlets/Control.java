@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.ucam.actions.Action;
 import edu.ucam.actions.AddAction;
+import edu.ucam.actions.AddCultivoAction;
 import edu.ucam.actions.DeleteAction;
+import edu.ucam.actions.DeleteCultivoAction;
 import edu.ucam.actions.UpdateAction;
+import edu.ucam.actions.UpdateCultivoAction;
+import edu.ucam.actions.AddFincaAction;
+import edu.ucam.actions.DeleteFincaAction;
+import edu.ucam.actions.UpdateFincaAction;
 import edu.ucam.beans.Usuario;
 
 /**
@@ -44,6 +50,12 @@ public class Control extends HttpServlet {
 			acciones.put("ADD", new AddAction());
 			acciones.put("DELETE", new DeleteAction());
 			acciones.put("UPDATE", new UpdateAction());
+			acciones.put("ADDFI", new AddFincaAction());
+			acciones.put("DELETEFI", new DeleteFincaAction());
+			acciones.put("UPDATEFI", new UpdateFincaAction());
+			acciones.put("ADDCUL", new AddCultivoAction());
+			acciones.put("DELETECUL", new DeleteCultivoAction());
+			acciones.put("UPDATECUL", new UpdateCultivoAction());
 		}
 	}
 	
@@ -53,7 +65,7 @@ public class Control extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String jsp = "/list.jsp"; //página de inicio tras loguearse
+		String jsp = "/principal.jsp"; //página de inicio tras loguearse
 		//Comprobamos si existe usuario "Logueado"
 		Usuario usuario = (Usuario)request.getSession().getAttribute("USUARIO_LOGED");
 		

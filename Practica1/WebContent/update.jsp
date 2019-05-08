@@ -24,10 +24,7 @@
 	<input type="hidden" name="ACTION_ID" value="UPDATE"/>
 	<input type="hidden" name="nombre" value="<%= usuario.getIdUsu() %>"/>
 	<fieldset style="background:#ffe1e1;">
-	<legend>MODIFICAR</legend>
-	<p>
-	<label for="id">Nick: <%= usuario.getIdUsu() %></label>
-	</p>
+	<legend>MODIFICAR <%= usuario.getIdUsu() %></legend>
 	<p>
 	<label for="name">Nombre a modificar:</label><br>
 	<input type="text" name="name" id="name" value="<%= usuario.getName() %>"/>

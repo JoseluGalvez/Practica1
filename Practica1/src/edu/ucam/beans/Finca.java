@@ -2,16 +2,16 @@ package edu.ucam.beans;
 
 public class Finca {
 	
-	private int id;
+	private String id;
 	private int hectareas;
 	private String name;
 	
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -32,7 +32,7 @@ public class Finca {
 		this.name = name;
 	}
 
-	public Finca(int id, int hectareas, String name) {
+	public Finca(String id, int hectareas, String name) {
 		super();
 		this.id = id;
 		this.hectareas = hectareas;

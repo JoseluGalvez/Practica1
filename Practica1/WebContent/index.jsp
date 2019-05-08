@@ -10,13 +10,6 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-<%
-		//Si recibimos un mensaje lo ponemos encima del formulario.
-		if (request.getAttribute("MSG")!=null){
-			out.println(request.getAttribute("MSG")+"<br>");
-		}
-%>
-	
 <form action="ServletLogin" method="POST">
 	<fieldset style="background:#e1eff2;">
 	<legend>LOGIN</legend>
@@ -31,7 +24,5 @@
 	</fieldset>	
 	<input type="submit" value="ACCEDER">
 </form>
-
-
 </body>
 </html>
