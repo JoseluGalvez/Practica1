@@ -36,7 +36,7 @@ String jsp = "/list.jsp";
 	
 	// Añado a la lista el usuario creado con los parámetros recibidos (atributos)
 	usuarios.put(idUsu, usuario);
-	request.setAttribute("MSG", "Usuario modificado.");
+	request.setAttribute("MSG", "Usuario ["+idUsu+"] modificado.");
 	return jsp;
 }
 

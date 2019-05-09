@@ -12,17 +12,11 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-<%
-	//Intentamos recuperar el usuario que ha iniciado sesión.
-	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
-
-%>
-<h5 align="RIGHT">Conectado como: <%= user.getIdUsu() %></h5><br>
 	<form action="Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADDFI"/>
 	<fieldset style="background:#feffe1;">
-		<legend>NUEVA FINCA</legend>
+		<legend> NUEVA FINCA </legend>
 		<p>
 		<label for="name">Nombre: </label>
 		<input type="text" name="name" id="name" required/>
@@ -48,10 +42,9 @@
 		for(Enumeration e = fincas.elements(); e.hasMoreElements();){
 			finca = (Finca)e.nextElement();
 			
-			out.println("<input type=\"button\" value=\"x\" onclick=\"window.location('Control?ACTION_ID=DELETEFI&idFin="+ finca.getId()+"')\" />"+"  ["+ finca.getId()
+			out.println("<a href=\"Control?ACTION_ID=DELETEFI&idFin="+ finca.getId()+"\">X Eliminar </a>["+finca.getId()
 				+"], Nombre: "+finca.getName()+", Hectáreas: "+finca.getHectareas()
 				+"<a href=\"updateFinca.jsp?nombre="+finca.getName()+"&idFin="+finca.getId()+"\">  Modificar</a><br>");
-
 		}
 	}else{
 		out.println("   - = No hay fincas. = -");

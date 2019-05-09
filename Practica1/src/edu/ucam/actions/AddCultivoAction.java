@@ -15,7 +15,8 @@ public class AddCultivoAction extends Action {
 		String jsp ="/listCultivo.jsp";
 		System.out.println("Entro en AddCultivoAction...");
 		
-		String name = (request.getParameter("nombre")==null)?"":(request.getParameter("nombre"));			
+		String name = (request.getParameter("name")==null)?"":(request.getParameter("name"));
+			
 			//Genero el id del cultivo
 				int atrContCul = (int)request.getServletContext().getAttribute("ATR_CONTCUL");
 				String idCul = "CUL"+ atrContCul;
@@ -39,9 +40,9 @@ public class AddCultivoAction extends Action {
 					request.setAttribute("MSG", "Cultivo en la lista.");
 			    }else {
 					// Añado a la lista el cultivo creado con los parámetros recibidos (atributos)
-			    	cultivos.put(idCul, cultivo);
+					cultivos.put(idCul, cultivo);
+					request.setAttribute("MSG", "Cultivo ["+idCul+"] añadido.");
 			    }
-				return jsp;	
+				return jsp;			
 	}
-
 }

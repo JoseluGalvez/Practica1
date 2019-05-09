@@ -7,9 +7,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LOGIN</title>
+<style type="text/css">
+html{
+	margin:20px;
+	font-family:Helvetica;
+	color:#333
+	}
+h1{
+	border:1px solid #d1d2d6;
+	background-color:#e8e9f7;
+	padding:15px 20px;
+	display:inline-block
+	}
+</style>
 </head>
 <body>
-<%@ include file="cabecera.jsp"%>
+<center><h1>- = FINCAS Y CULTIVOS = -</h1></center><br>
+<% //Si recibimos un mensaje lo ponemos encima del formulario.
+if (request.getAttribute("MSG")!=null){
+	out.println(request.getAttribute("MSG")+"<br>");
+}
+%>
 <form action="ServletLogin" method="POST">
 	<fieldset style="background:#e1eff2;">
 	<legend>LOGIN</legend>

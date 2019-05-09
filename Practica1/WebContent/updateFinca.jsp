@@ -17,19 +17,18 @@
 //recupero la finca a modificar
 	Finca finca = fincas.get(request.getParameter("idFin"));
 %>
-<br>
 	<form action="Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATEFI"/>
 	<input type="hidden" name="nombre" value="<%= finca.getId() %>"/>
 	<fieldset style="background:#ffe1e1;">
-	<legend>MODIFICAR <%= finca.getId() %></legend>
+	<legend> MODIFICAR <%= finca.getId() %> </legend>
 	<p>
 	<label for="name">Nombre a modificar:</label><br>
 	<input type="text" name="name" id="name" value="<%= finca.getName() %>"/>
 	</p>
 	<p>
-	<label for="surname">Hectáreas a modificar:</label><br>
+	<label for="hectareas">Hectáreas a modificar:</label><br>
 	<input type="number" name="hectareas" id="hectareas" value="<%= finca.getHectareas() %>"/>
 	</p>
 	</fieldset>	

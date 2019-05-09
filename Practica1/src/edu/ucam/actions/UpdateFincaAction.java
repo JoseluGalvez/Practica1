@@ -39,7 +39,7 @@ String jsp = "/listFinca.jsp";
 			// Añado a la lista la finca modificada con los datos incorporados y sobreescribo
 			// los datos de esa finca en la lista de fincas
 			fincas.put(idFin, finca);
-			request.setAttribute("MSG", "Finca modificada.");
+			request.setAttribute("MSG", "Finca ["+idFin+"] modificada.");
 			return jsp;
 		}else{ //Si hectáreas no es número
             System.out.println("No es un numero");

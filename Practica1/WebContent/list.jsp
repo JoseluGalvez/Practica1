@@ -11,16 +11,11 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-<%
-	//Intentamos recuperar el usuario que ha iniciado sesión.
-	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
-%>
-<label ALIGN="RIGHT">Conectado como: <%= user.getIdUsu() %></label><br>
 	<form action="Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADD"/>
 	<fieldset style="background:#feffe1;">
-		<legend>NUEVO USUARIO</legend>
+		<legend> NUEVO USUARIO </legend>
 		<p>
 		<label for="nombre">*Nick usuario nuevo: </label>
 		<input type="text" name="nombre" id="nombre" required/>
@@ -50,12 +45,10 @@
 	Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
 
 	if (usuarios != null && usuarios.size() > 0){
-		
 		Usuario usuario;
 		for(Enumeration e = usuarios.elements(); e.hasMoreElements();){
 			usuario = (Usuario)e.nextElement();
-			
-			out.println("<input type=\"button\" value=\"x\" onclick=\"window.location('Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"')\" />"+"  ["+ usuario.getIdUsu()
+			out.println("<a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"\">X Eliminar </a>["+usuario.getIdUsu()
 				+"], Nombre: "+usuario.getName()+", Apellidos: "+usuario.getSurname()+" "
 				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\">  Modificar</a><br>");
 		}

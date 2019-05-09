@@ -12,19 +12,14 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-<%
-	//Intentamos recuperar el usuario que ha iniciado sesión.
-	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
-%>
-<h5 align="RIGHT">Conectado como: <%= user.getIdUsu() %></h5><br>
 	<form action="Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADDCUL"/>
 	<fieldset style="background:#feffe1;">
-		<legend>NUEVO CULTIVO</legend>
+		<legend> NUEVO CULTIVO </legend>
 		<p>
 		<label for="name">Descripción: </label>
-		<textarea id="name" required></textarea>
+		<input type="text" name="name" id="name" required/>
 		</p>
 		</fieldset>
 		<p>
@@ -43,10 +38,9 @@
 		for(Enumeration e = cultivos.elements(); e.hasMoreElements();){
 			cultivo = (Cultivo)e.nextElement();
 			
-			out.println("<input type=\"button\" value=\"x\" onclick=\"window.location('Control?ACTION_ID=DELETECUL&idCul="+ cultivo.getId()+"')\" />"+"  ["+ cultivo.getId()
-				+"], Descripción: "+ cultivo.getDescription()
-				+"<a href=\"updateCultivo.jsp?nombre="+cultivo.getDescription()+"&idCul="+cultivo.getId()+"\">  Modificar</a><br>");
-
+			out.println("<a href=\"Control?ACTION_ID=DELETECUL&idCul="+ cultivo.getId()+"\">X Eliminar </a>["+cultivo.getId()
+				+"], Descripción: "+cultivo.getDescription()
+				+"<a href=\"updateCultivo.jsp?name="+cultivo.getDescription()+"&idCul="+cultivo.getId()+"\">  Modificar</a><br>");
 		}
 	}else{
 		out.println("   - = No hay cultivos. = -");

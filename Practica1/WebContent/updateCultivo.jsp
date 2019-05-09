@@ -11,31 +11,26 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-
 <%
 //Recuperamos del contexto la lista de los cultivos
 	Hashtable <String, Cultivo> cultivos = (Hashtable <String, Cultivo>)request.getServletContext().getAttribute("ATR_CULTIVOS");
 //recupero el cultivo a modificar
 	Cultivo cultivo = cultivos.get(request.getParameter("idCul"));
 %>
-<br>
 	<form action="Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATECUL"/>
 	<input type="hidden" name="nombre" value="<%= cultivo.getId() %>"/>
 	<fieldset style="background:#ffe1e1;">
-	<legend>MODIFICAR <%= cultivo.getId() %></legend>
+	<legend> MODIFICAR <%= cultivo.getId() %> </legend>
 	<p>
 	<label for="name">Descripción a modificar:</label><br>
-	<textarea id="name"/><%= cultivo.getDescription() %></textarea>
+	<input type="text" name="name" id="name" value="<%= cultivo.getDescription() %>"/>
 	</p>
 	</fieldset>	
 	<p>
 	<input type="submit" value="MODIFICAR">
 	</p>
 	</form><br><br>
-
-
-
 </body>
 </html>

@@ -37,6 +37,7 @@ public class AddAction extends Action {
 	    }else {
 			// Añado a la lista el usuario creado con los parámetros recibidos (atributos)
 			usuarios.put(idUsu, usuario);
+			request.setAttribute("MSG", "Usuario ["+idUsu+"] añadido.");
 	    }
 		return jsp;
 	}

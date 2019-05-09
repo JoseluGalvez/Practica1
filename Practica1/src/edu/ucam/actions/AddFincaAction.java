@@ -45,6 +45,7 @@ public class AddFincaAction extends Action {
 			    }else {
 					// Añado a la lista la finca creada con los parámetros recibidos (atributos)
 					fincas.put(idFin, finca);
+					request.setAttribute("MSG", "Finca ["+idFin+"] añadida.");
 			    }
 				return jsp;	
 		}else{

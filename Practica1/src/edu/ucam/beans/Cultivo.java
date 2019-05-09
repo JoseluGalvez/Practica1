@@ -26,11 +26,4 @@ public class Cultivo {
 		this.description = description;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Cultivo [id=" + id + ", description=" + description + "]";
-	}
-	
-
 }

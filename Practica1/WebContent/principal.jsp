@@ -9,15 +9,11 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-<%
-	//Intentamos recuperar el usuario que ha iniciado sesión.
-	Usuario user = (Usuario) session.getAttribute("USUARIO_LOGED");
-%>
 Bienvenido, <%= user.getIdUsu() %>!<br>
 
-<a href="list.jsp">  USUARIOS</a><br>
-<a href="listFinca.jsp">  FINCAS</a><br>
-<a href="listCultivo.jsp">  CULTIVOS</a><br>
+Gestionar <a href="list.jsp">  USUARIOS</a><br><br>
+Gestionar <a href="listFinca.jsp">  FINCAS</a><br><br>
+Gestionar <a href="listCultivo.jsp">  CULTIVOS</a><br><br>
 		
 </body>
 </html>
