@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-	<form action="Control" method="POST">
+	<form action="<%=request.getContextPath()%>/Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADD"/>
 	<fieldset style="background:#feffe1;">
@@ -32,6 +32,10 @@
 		<label for="surname">Apellidos: </label>
 		<input type="text" name="surname" id="surname" value=""/>
 		</p>
+		<p>
+    	<input type="radio" name="tipo" value="normal" checked> Normal    
+    	<input type="radio" name="tipo" value="administrador"> Administrador
+  		</p>
 		<h6>Los campos marcados con * son obligatorios.</h6>
 		</fieldset>
 		<p>
@@ -46,12 +50,32 @@
 
 	if (usuarios != null && usuarios.size() > 0){
 		Usuario usuario;
+		out.println("<table class=\"egt\"><tr>"
+				+"<th>[Eliminar]</th>"
+				+"<th>[ ID ]</th>"
+				+"<th>[ Nombre ]</th>"
+				+"<th>[ Apellidos ]</th>"
+				+"<th>[ Tipo usuario ]</th>"
+				+"<th>[Modificar]</th></tr>");
+				  
 		for(Enumeration e = usuarios.elements(); e.hasMoreElements();){
 			usuario = (Usuario)e.nextElement();
-			out.println("<a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"\">X Eliminar </a>["+usuario.getIdUsu()
-				+"], Nombre: "+usuario.getName()+", Apellidos: "+usuario.getSurname()+" "
-				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\">  Modificar</a><br>");
+			String tipo = (usuario.isAdmin()==true)?"Admin":"Normal";
+
+//			out.println("<a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"\">X Eliminar </a>["+usuario.getIdUsu()
+//				+"], Nombre: "+usuario.getName()+", Apellidos: "+usuario.getSurname()+", Usuario: "+tipo+" "
+//				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\">  Modificar</a><br>");
+		
+			out.println("<tr>"
+			+"<td><a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+ "\">X </a></td>"
+			+"<td> "+usuario.getIdUsu()+" </td>"
+			+"<td> "+usuario.getName()+" </td>"
+			+"<td> "+usuario.getSurname()+" </td>"
+			+"<td> "+tipo+" </td>"
+			+"<td><a href=\"secured/update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\"> >> </a></td>"
+			+"</tr>");
 		}
+		out.println("</table>");
 	}else{
 		out.println("   - = No hay usuarios. = -");
 	}

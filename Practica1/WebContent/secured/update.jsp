@@ -17,7 +17,7 @@
 //recupero el usuario a modificar
 	Usuario usuario = usuarios.get(request.getParameter("idUsu"));
 %>
-	<form action="Control" method="post">
+	<form action="<%=request.getContextPath()%>/Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATE"/>
 	<input type="hidden" name="nombre" value="<%= usuario.getIdUsu() %>"/>
@@ -35,6 +35,25 @@
 	<label for="contrasena">Contraseña a modificar:</label><br>
 	<input type="text" name="pass" id="pass" value="<%= usuario.getPass() %>"/>
 	</p>
+	<p>
+    <input type="radio" name="tipo" value="normal"
+		    <% if (usuario.isAdmin()){
+		    	out.println("");
+		    }else {
+		    	out.println("checked");
+		    	}
+		    %>
+	    > Normal    
+    
+    <input type="radio" name="tipo" value="administrador"
+    		<% if (usuario.isAdmin()){
+		    	out.println("checked");
+		    }else {
+		    	out.println("");
+		    	}
+		    %>
+    > Administrador
+  	</p>
 	</fieldset>	
 	<p>
 	<input type="submit" value="MODIFICAR">

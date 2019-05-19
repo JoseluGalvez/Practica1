@@ -14,7 +14,7 @@ public class DeleteAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String jsp ="/list.jsp";
+		String jsp ="/secured/list.jsp";
 		System.out.println("Entro en DeleteAction...");
 		
 		String idUsu = request.getParameter("nombre");
@@ -27,9 +27,9 @@ public class DeleteAction extends Action {
 			// Comprobamos si existe ese ID
 		    if(usuarios.containsKey(idUsu)) {
 		    	usuarios.remove(idUsu);
-				request.setAttribute("MSG", "Usuario eliminado");
+				request.setAttribute("MSG", "Usuario ["+idUsu+"] eliminado");
 		    }else {
-			request.setAttribute("MSG", "Usuario no encontrado");
+			request.setAttribute("MSG", "Usuario ["+idUsu+"] no encontrado");
 		    }
 		}
 		return jsp;

@@ -6,13 +6,15 @@ public class Usuario {
 	private String name;
 	private String surname;
 	private String pass;
+	boolean admin;
 	
-	public Usuario(String idUsu, String name, String surname, String pass) {
+	public Usuario(String idUsu, String name, String surname, String pass, boolean admin) {
 		super();
 		this.idUsu = idUsu;
 		this.name = name;
 		this.surname = surname;
 		this.pass = pass;
+		this.admin = admin;
 	}
 	
 	public Usuario(String idUsu, String name, String pass) {
@@ -52,6 +54,14 @@ public class Usuario {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 

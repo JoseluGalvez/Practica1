@@ -17,7 +17,7 @@
 //recupero la finca a modificar
 	Finca finca = fincas.get(request.getParameter("idFin"));
 %>
-	<form action="Control" method="post">
+	<form action="<%=request.getContextPath()%>/Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATEFI"/>
 	<input type="hidden" name="nombre" value="<%= finca.getId() %>"/>

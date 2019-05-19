@@ -14,7 +14,7 @@ public class DeleteCultivoAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String jsp ="/listCultivo.jsp";
+		String jsp ="/secured/listCultivo.jsp";
 		System.out.println("Entro en DeleteCultivoAction...");
 		
 		String idCul = request.getParameter("idCul");
@@ -27,9 +27,9 @@ public class DeleteCultivoAction extends Action {
 			// Comprobamos si existe ese ID
 		    if(cultivos.containsKey(idCul)) {
 		    	cultivos.remove(idCul);
-				request.setAttribute("MSG", "Cultivo eliminado");
+				request.setAttribute("MSG", "Cultivo ["+idCul+"] eliminado");
 		    }else {
-			request.setAttribute("MSG", "Cultivo no encontrado");
+			request.setAttribute("MSG", "Cultivo ["+idCul+"] no encontrado");
 		    }
 		}
 		return jsp;

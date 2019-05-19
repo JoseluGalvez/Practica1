@@ -12,7 +12,7 @@ public class AddFincaAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String jsp ="/listFinca.jsp";
+		String jsp ="/secured/listFinca.jsp";
 		System.out.println("Entro en AddFincaAction...");
 		
 		String name = (request.getParameter("name")==null)?"":(request.getParameter("name"));

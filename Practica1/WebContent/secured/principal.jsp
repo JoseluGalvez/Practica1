@@ -11,9 +11,11 @@
 <%@ include file="cabecera.jsp"%>
 Bienvenido, <%= user.getIdUsu() %>!<br>
 
-Gestionar <a href="list.jsp">  USUARIOS</a><br><br>
-Gestionar <a href="listFinca.jsp">  FINCAS</a><br><br>
-Gestionar <a href="listCultivo.jsp">  CULTIVOS</a><br><br>
+<% if (user.isAdmin()){ %>
+Gestionar <a href="<%=request.getContextPath()%>/secured/list.jsp">  USUARIOS</a><br><br>
+<%} %>
+Gestionar <a href="<%=request.getContextPath()%>/secured/listFinca.jsp">  FINCAS</a><br><br>
+Gestionar <a href="<%=request.getContextPath()%>/secured/listCultivo.jsp">  CULTIVOS</a><br><br>
 		
 </body>
 </html>

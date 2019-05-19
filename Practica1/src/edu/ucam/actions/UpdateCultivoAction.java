@@ -14,7 +14,7 @@ public class UpdateCultivoAction extends Action {
 @Override
 public String execute(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-String jsp = "/listCultivo.jsp";
+String jsp = "/secured/listCultivo.jsp";
 	
 	System.out.println("Entro en UpdateCultivoAction...");
 	

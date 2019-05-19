@@ -24,7 +24,7 @@ import edu.ucam.beans.Usuario;
 /**
  * Servlet implementation class Control
  */
-@WebServlet("/Control")
+@WebServlet(urlPatterns= {"/Control"}, name="Control")
 public class Control extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -65,7 +65,7 @@ public class Control extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String jsp = "/principal.jsp"; //página de inicio tras loguearse
+		String jsp = "/secured/principal.jsp"; //página de inicio tras loguearse
 		//Comprobamos si existe usuario "Logueado"
 		Usuario usuario = (Usuario)request.getSession().getAttribute("USUARIO_LOGED");
 		

@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-	<form action="Control" method="POST">
+	<form action="<%=request.getContextPath()%>/Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADDFI"/>
 	<fieldset style="background:#feffe1;">
@@ -44,7 +44,7 @@
 			
 			out.println("<a href=\"Control?ACTION_ID=DELETEFI&idFin="+ finca.getId()+"\">X Eliminar </a>["+finca.getId()
 				+"], Nombre: "+finca.getName()+", Hectáreas: "+finca.getHectareas()
-				+"<a href=\"updateFinca.jsp?nombre="+finca.getName()+"&idFin="+finca.getId()+"\">  Modificar</a><br>");
+				+"<a href=\"secured/updateFinca.jsp?nombre="+finca.getName()+"&idFin="+finca.getId()+"\">  Modificar</a><br>");
 		}
 	}else{
 		out.println("   - = No hay fincas. = -");

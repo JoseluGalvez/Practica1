@@ -17,7 +17,7 @@
 //recupero el cultivo a modificar
 	Cultivo cultivo = cultivos.get(request.getParameter("idCul"));
 %>
-	<form action="Control" method="post">
+	<form action="<%=request.getContextPath()%>/Control" method="post">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="UPDATECUL"/>
 	<input type="hidden" name="nombre" value="<%= cultivo.getId() %>"/>

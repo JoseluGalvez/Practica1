@@ -21,7 +21,7 @@ h1{
 </style>
 </head>
 <body>
-<center><a href="<%=request.getContextPath()%>/principal.jsp"><h1>- = FINCAS Y CULTIVOS = -</h1></a></center>
+<center><a href="<%=request.getContextPath()%>/secured/principal.jsp"><h1>- = FINCAS Y CULTIVOS = -</h1></a></center>
 <br>
 <%
 	//Intentamos recuperar el usuario que ha iniciado sesión.
@@ -29,12 +29,12 @@ h1{
 	if (user!=null){
 	out.println("<h5 align=\"RIGHT\">Conectado como:  "+user.getIdUsu()+"</h5><hr>");
 	}
-	//Si recibimos un mensaje lo ponemos debajo de la cabecera,
-	//encima del formulario.
+	//Si recibimos un mensaje lo ponemos debajo de la cabecera, encima del formulario.
 	if (request.getAttribute("MSG")!=null){
 		out.println(request.getAttribute("MSG")+"<br>");
 	}else {
-		out.println("<br>");
+		out.println("<br>"); 	// Salto de línea para que no haya desplazamiento brusco hacia abajo 
+								// cuando haya mensaje
 	}
 %>
 </body>

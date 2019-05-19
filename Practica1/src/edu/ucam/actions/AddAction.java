@@ -12,15 +12,17 @@ public class AddAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String jsp ="/list.jsp";
+		String jsp ="/secured/list.jsp";
 		System.out.println("Entro en AddAction...");
 		
 		String idUsu = (request.getParameter("nombre")==null)?"":(request.getParameter("nombre"));
 		String name = (request.getParameter("name")==null)?"":(request.getParameter("name"));
 		String surname = (request.getParameter("surname")==null)?"":(request.getParameter("surname"));
 		String pass = (request.getParameter("pass")==null)?"":(request.getParameter("pass"));
+
+		boolean admin = ((request.getParameter("tipo")).equals("administrador"))?true:(false);
 		
-		Usuario usuario = new Usuario(idUsu, name, surname, pass);
+		Usuario usuario = new Usuario(idUsu, name, surname, pass, admin);
 		
 		//Declaro la lista de usuarios con su "casting" correspondiente.
 		Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");

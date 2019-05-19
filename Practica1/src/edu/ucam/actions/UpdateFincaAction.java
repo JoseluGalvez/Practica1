@@ -14,7 +14,7 @@ public class UpdateFincaAction extends Action {
 @Override
 public String execute(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-String jsp = "/listFinca.jsp";
+String jsp = "/secured/listFinca.jsp";
 	
 	System.out.println("Entro en UpdateFincaAction...");
 	
@@ -45,7 +45,7 @@ String jsp = "/listFinca.jsp";
             System.out.println("No es un numero");
             request.setAttribute("MSG", "Introduzca hectáreas en número");
             // AL recargar updateFinca tengo que volver a pasar los parámetros necesarios
-            jsp = "/updateFinca.jsp?nombre="+name+"&idFin="+idFin;
+            jsp = "/secured/updateFinca.jsp?nombre="+name+"&idFin="+idFin;
         }
 		return jsp;	
 		}

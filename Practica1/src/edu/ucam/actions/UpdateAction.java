@@ -14,7 +14,7 @@ public class UpdateAction extends Action {
 @Override
 public String execute(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
-String jsp = "/list.jsp";
+String jsp = "/secured/list.jsp";
 	
 	System.out.println("Entro en UpdateAction...");
 	
@@ -22,10 +22,13 @@ String jsp = "/list.jsp";
 	String name = (request.getParameter("name")==null)?"":(request.getParameter("name"));
 	String surname = (request.getParameter("surname")==null)?"":(request.getParameter("surname"));
 	String pass = (request.getParameter("pass")==null)?"":(request.getParameter("pass"));
+
+	boolean admin = ((request.getParameter("tipo")).equals("administrador"))?true:(false);
+
 	
 	//Declaro la lista de usuarios con su "casting" correspondiente.
-	Usuario usuario = new Usuario(idUsu, name, surname, pass);
-	
+	Usuario usuario = new Usuario(idUsu, name, surname, pass, admin);
+
 	Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
 	
 	//Si no tengo la lista de usuarios la creo y la guardo en el contexto

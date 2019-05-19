@@ -12,7 +12,7 @@
 </head>
 <body>
 <%@ include file="cabecera.jsp"%>
-	<form action="Control" method="POST">
+	<form action="<%=request.getContextPath()%>/Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADDCUL"/>
 	<fieldset style="background:#feffe1;">
@@ -40,7 +40,7 @@
 			
 			out.println("<a href=\"Control?ACTION_ID=DELETECUL&idCul="+ cultivo.getId()+"\">X Eliminar </a>["+cultivo.getId()
 				+"], Descripción: "+cultivo.getDescription()
-				+"<a href=\"updateCultivo.jsp?name="+cultivo.getDescription()+"&idCul="+cultivo.getId()+"\">  Modificar</a><br>");
+				+"<a href=\"secured/updateCultivo.jsp?name="+cultivo.getDescription()+"&idCul="+cultivo.getId()+"\">  Modificar</a><br>");
 		}
 	}else{
 		out.println("   - = No hay cultivos. = -");

@@ -14,7 +14,7 @@ public class DeleteFincaAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String jsp ="/listFinca.jsp";
+		String jsp ="/secured/listFinca.jsp";
 		System.out.println("Entro en DeleteFincaAction...");
 		
 		String idFin = request.getParameter("idFin");
@@ -27,9 +27,9 @@ public class DeleteFincaAction extends Action {
 			// Comprobamos si existe ese ID
 		    if(fincas.containsKey(idFin)) {
 		    	fincas.remove(idFin);
-				request.setAttribute("MSG", "Finca eliminada");
+				request.setAttribute("MSG", "Finca ["+idFin+"] eliminada");
 		    }else {
-			request.setAttribute("MSG", "Finca no encontrada");
+			request.setAttribute("MSG", "Finca ["+idFin+"] no encontrada");
 		    }
 		}
 		return jsp;
