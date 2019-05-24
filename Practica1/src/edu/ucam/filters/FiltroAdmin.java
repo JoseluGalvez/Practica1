@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebFilter;
 
 import edu.ucam.actions.Action;
 import edu.ucam.beans.Usuario;
+import edu.ucam.servlets.Control;
+import edu.ucam.servlets.ServletLogin;
 
 /**
  * Servlet Filter implementation class FiltroAdmin
@@ -43,10 +45,10 @@ public class FiltroAdmin implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		//Comprobamos si existe usuario "Logueado"
-				Usuario usuario = (Usuario)((HttpServletRequest) request).getSession().getAttribute("USUARIO_LOGED");
+				Usuario usuario = (Usuario)((HttpServletRequest) request).getSession().getAttribute(ServletLogin.USUARIO_LOGED);
 				//Cogemos el parámetro que llega para identificar la acción a realizar
-				String actionId = request.getParameter("ACTION_ID");
-				if (usuario != null) {
+				String actionId = request.getParameter(Control.ACTION_ID);
+				if (usuario != null && actionId != null) {
 					
 					 if(accionesAdmin.containsKey(actionId)) {
 						 if(usuario.isAdmin()) {

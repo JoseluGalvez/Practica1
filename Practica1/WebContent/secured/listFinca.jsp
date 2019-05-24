@@ -2,6 +2,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="edu.ucam.beans.Usuario"%>
 <%@page import="edu.ucam.beans.Finca"%>
+<%@ taglib uri="tagspractica" prefix="logcont" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,7 +11,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>FINCAS</title>
 </head>
-<body>
+<body bgcolor="#fff9f2">
 <%@ include file="cabecera.jsp"%>
 	<form action="<%=request.getContextPath()%>/Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
@@ -27,7 +28,7 @@
 		</p>
 		</fieldset>
 		<p>
-		<input type="submit" value="AÑADIR">
+		<input type="submit" value="+ AÑADIR">
 		</p>
 	</form>
 	<br><br>
@@ -37,19 +38,36 @@
 	Hashtable <String, Finca> fincas = (Hashtable <String, Finca>)request.getServletContext().getAttribute("ATR_FINCAS");
 
 	if (fincas != null && fincas.size() > 0){
-		
 		Finca finca;
+		out.println("<table><tr>"
+				+"<th>[Eliminar]</th>"
+				+"<th>[ ID ]</th>"
+				+"<th>[ Nombre ]</th>"
+				+"<th>[ Hectáreas ]</th>"
+				+"<th>[Modificar]</th></tr>");
+
 		for(Enumeration e = fincas.elements(); e.hasMoreElements();){
 			finca = (Finca)e.nextElement();
 			
-			out.println("<a href=\"Control?ACTION_ID=DELETEFI&idFin="+ finca.getId()+"\">X Eliminar </a>["+finca.getId()
-				+"], Nombre: "+finca.getName()+", Hectáreas: "+finca.getHectareas()
-				+"<a href=\"secured/updateFinca.jsp?nombre="+finca.getName()+"&idFin="+finca.getId()+"\">  Modificar</a><br>");
+			out.println("<tr>"
+			+"<td align=\"CENTER\"><a href=\""+request.getContextPath()+"/Control?ACTION_ID=DELETEFI&idFin="+ finca.getId()+"\">X </a></td>"
+			+"<td align=\"CENTER\"> "+finca.getId()+" </td>"
+			+"<td align=\"CENTER\"> "+finca.getName()+" </td>"
+			+"<td align=\"CENTER\"> "+finca.getHectareas()+" </td>"
+			+"<td align=\"CENTER\"><a href=\""+request.getContextPath()+"/secured/updateFinca.jsp?nombre="+finca.getName()+"&idFin="+finca.getId()+"\"> >> </a></td>"
+			+"</tr>");			
 		}
+		out.println("</table>");
 	}else{
 		out.println("   - = No hay fincas. = -");
 	}
 %>
-
+<br>
+		<!-- ETIQUETA que contabiliza las inserciones y eliminación de fincas en esta sesion -->
+<logcont:LogFin/>
+<br>
+<% //BOTON VOLVER
+out.println("<a href=\"" +request.getContextPath()+ "/secured/principal.jsp \"><button>< VOLVER</button></a>");
+%>
 </body>
 </html>

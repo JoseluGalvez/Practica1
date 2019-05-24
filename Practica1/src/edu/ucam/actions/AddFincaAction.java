@@ -45,6 +45,9 @@ public class AddFincaAction extends Action {
 			    }else {
 					// Añado a la lista la finca creada con los parámetros recibidos (atributos)
 					fincas.put(idFin, finca);
+					//Incremento cantidad de cultivos añadidos por usuario actual en esta sesion
+					int contAddCul = (int)request.getSession().getAttribute("FIN_ADD");
+					request.getSession().setAttribute("FIN_ADD", ++contAddCul);
 					request.setAttribute("MSG", "Finca ["+idFin+"] añadida.");
 			    }
 				return jsp;	

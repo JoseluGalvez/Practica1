@@ -1,6 +1,7 @@
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="edu.ucam.beans.Usuario"%>
+<%@ taglib uri="tagspractica" prefix="useradmin" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,11 +10,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MODIFICAR</title>
 </head>
-<body>
+<body bgcolor="#f2fbff">
 <%@ include file="cabecera.jsp"%>
+
+<!-- EIQUETA, si no Admin -> SKIP_BODY -->
+<useradmin:AdminLogged>
+
 <%
 //Recuperamos del contexto la lista de los usuarios
 	Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
+//Compruebo si existe
+	boolean exist=usuarios.containsKey(request.getParameter("idUsu"));
+	if(exist == false){
+		out.println("El usuario que desea modificar no existe, puede que haya sido eliminado por otro administrador.");
+	}else {
 //recupero el usuario a modificar
 	Usuario usuario = usuarios.get(request.getParameter("idUsu"));
 %>
@@ -56,11 +66,16 @@
   	</p>
 	</fieldset>	
 	<p>
-	<input type="submit" value="MODIFICAR">
+	<input type="submit" value="~ MODIFICAR">
 	</p>
-	</form><br><br>
-
-
-
+	</form><br>
+	<br>
+<%} %>
+</useradmin:AdminLogged>
+<br>	
+<% //VOLVER
+out.println("<a href=\"" +request.getContextPath()+ "/secured/list.jsp \"><button>< VOLVER</button></a>");
+%>
+	
 </body>
 </html>

@@ -27,6 +27,11 @@ public class DeleteFincaAction extends Action {
 			// Comprobamos si existe ese ID
 		    if(fincas.containsKey(idFin)) {
 		    	fincas.remove(idFin);
+		    	
+				//Incremento cantidad de fincas eliminadas por usuario actual en esta sesion
+				int contDelFin = (int)request.getSession().getAttribute("FIN_DEL");
+				request.getSession().setAttribute("FIN_DEL", ++contDelFin);
+		    	
 				request.setAttribute("MSG", "Finca ["+idFin+"] eliminada");
 		    }else {
 			request.setAttribute("MSG", "Finca ["+idFin+"] no encontrada");

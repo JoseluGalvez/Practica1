@@ -10,16 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.ucam.actions.Action;
-import edu.ucam.actions.AddAction;
-import edu.ucam.actions.AddCultivoAction;
-import edu.ucam.actions.DeleteAction;
-import edu.ucam.actions.DeleteCultivoAction;
-import edu.ucam.actions.UpdateAction;
-import edu.ucam.actions.UpdateCultivoAction;
-import edu.ucam.actions.AddFincaAction;
-import edu.ucam.actions.DeleteFincaAction;
-import edu.ucam.actions.UpdateFincaAction;
 import edu.ucam.beans.Usuario;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Properties;
+
 
 /**
  * Servlet implementation class Control
@@ -27,8 +23,9 @@ import edu.ucam.beans.Usuario;
 @WebServlet(urlPatterns= {"/Control"}, name="Control")
 public class Control extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String ACTION_ID = "ACTION_ID";
 	
-		private Hashtable<String, Action> acciones;
+		private Hashtable<String, Action> actions;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,20 +40,35 @@ public class Control extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		
-		if (acciones == null) {
+		//System.out.print("Inicializando...");
+		
+		//Obtenemos la ruta al fichero donde estÔøΩn definidas todas las acciones.
+		String filePath = this.getServletContext().getRealPath("WEB-INF/acciones.properties");
+		//System.out.println(filePath);
+		
+			try {
+				Properties propiedades = new Properties();
+				propiedades.load(new FileReader(filePath));
+				
+				String accionesStr = propiedades.getProperty("acciones");
+				String acciones[] = accionesStr.split(" ");
+				
+				//Creamos un objeto de cada accion y lo guardamos en la tabla hash
+				Action accion = null;
+				this.actions = new Hashtable<String, Action>();
+				for(int i = 0; i < acciones.length;i++){
+					accion = (Action)Class.forName(propiedades.getProperty(acciones[i])).newInstance();
+					this.actions.put(acciones[i], accion);
+				}
+				
+			} catch (FileNotFoundException e) {
+			} catch (IOException e) {
+			} catch (InstantiationException e) {
+			} catch (IllegalAccessException e) {
+			} catch (ClassNotFoundException e) {
+			}
 			
-					//Lista de acciones
-			acciones = new Hashtable<String, Action>();
-			acciones.put("ADD", new AddAction());
-			acciones.put("DELETE", new DeleteAction());
-			acciones.put("UPDATE", new UpdateAction());
-			acciones.put("ADDFI", new AddFincaAction());
-			acciones.put("DELETEFI", new DeleteFincaAction());
-			acciones.put("UPDATEFI", new UpdateFincaAction());
-			acciones.put("ADDCUL", new AddCultivoAction());
-			acciones.put("DELETECUL", new DeleteCultivoAction());
-			acciones.put("UPDATECUL", new UpdateCultivoAction());
-		}
+			//System.out.println("[ok]");
 	}
 	
 	
@@ -65,19 +77,19 @@ public class Control extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String jsp = "/secured/principal.jsp"; //p·gina de inicio tras loguearse
+		String jsp = "/secured/principal.jsp"; //p√°gina de inicio tras loguearse
 		//Comprobamos si existe usuario "Logueado"
 		Usuario usuario = (Usuario)request.getSession().getAttribute("USUARIO_LOGED");
 		
 		if (usuario != null) {
-			//Cogemos el par·metro que llega para identificar la acciÛn a realizar
-			String actionId = request.getParameter("ACTION_ID");
-			Action accion = this.acciones.get(actionId); 
+			//Cogemos el par√°metro que llega para identificar la acci√≥n a realizar
+			String actionId = request.getParameter(Control.ACTION_ID);
+			Action accion = this.actions.get(actionId); 
 			
-			//La jsp de respuesta depender· de la acciÛn que se ha realizado
+			//La jsp de respuesta depender√° de la acci√≥n que se ha realizado
 			jsp = accion.execute(request, response);
 									
-		}else { //No se est· "Logueado"
+		}else { //No se est√° "Logueado"
 			jsp="/index.jsp";
 			request.setAttribute("MSG", "Acceso restringido");
 		}
@@ -90,7 +102,7 @@ public class Control extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		doGet(request, response);
 	}
 

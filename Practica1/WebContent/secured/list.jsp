@@ -1,6 +1,7 @@
 <%@page import="java.util.Enumeration"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="edu.ucam.beans.Usuario"%>
+<%@ taglib uri="tagspractica" prefix="useradmin" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,8 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>LISTA</title>
 </head>
-<body>
+<body bgcolor="#f2fbff">
 <%@ include file="cabecera.jsp"%>
+
+<!-- EIQUETA, si no Admin -> SKIP_BODY -->
+<useradmin:AdminLogged>
+
 	<form action="<%=request.getContextPath()%>/Control" method="POST">
 <!-- hidden para que no se vea el campo que contiene la acción -->
 	<input type="hidden" name="ACTION_ID" value="ADD"/>
@@ -39,7 +44,7 @@
 		<h6>Los campos marcados con * son obligatorios.</h6>
 		</fieldset>
 		<p>
-		<input type="submit" value="AÑADIR">
+		<input type="submit" value="+ AÑADIR">
 		</p>
 	</form>
 	<br><br>
@@ -47,10 +52,9 @@
 <%
 //Recuperamos del contexto todos los usuarios
 	Hashtable <String, Usuario> usuarios = (Hashtable <String, Usuario>)request.getServletContext().getAttribute("ATR_USUARIOS");
-
 	if (usuarios != null && usuarios.size() > 0){
 		Usuario usuario;
-		out.println("<table class=\"egt\"><tr>"
+		out.println("<table><tr>"
 				+"<th>[Eliminar]</th>"
 				+"<th>[ ID ]</th>"
 				+"<th>[ Nombre ]</th>"
@@ -61,24 +65,25 @@
 		for(Enumeration e = usuarios.elements(); e.hasMoreElements();){
 			usuario = (Usuario)e.nextElement();
 			String tipo = (usuario.isAdmin()==true)?"Admin":"Normal";
-
-//			out.println("<a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+"\">X Eliminar </a>["+usuario.getIdUsu()
-//				+"], Nombre: "+usuario.getName()+", Apellidos: "+usuario.getSurname()+", Usuario: "+tipo+" "
-//				+"<a href=\"update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\">  Modificar</a><br>");
 		
 			out.println("<tr>"
-			+"<td><a href=\"Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+ "\">X </a></td>"
-			+"<td> "+usuario.getIdUsu()+" </td>"
-			+"<td> "+usuario.getName()+" </td>"
-			+"<td> "+usuario.getSurname()+" </td>"
-			+"<td> "+tipo+" </td>"
-			+"<td><a href=\"secured/update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\"> >> </a></td>"
+			+"<td align=\"CENTER\"><a href=\""+request.getContextPath()+"/Control?ACTION_ID=DELETE&nombre="+usuario.getIdUsu()+ "\">X </a></td>"
+			+"<td align=\"CENTER\"> "+usuario.getIdUsu()+" </td>"
+			+"<td align=\"CENTER\"> "+usuario.getName()+" </td>"
+			+"<td align=\"CENTER\"> "+usuario.getSurname()+" </td>"
+			+"<td align=\"CENTER\"> "+tipo+" </td>"
+			+"<td align=\"CENTER\"><a href=\""+request.getContextPath()+"/secured/update.jsp?nombre="+usuario.getName()+"&pass="+ usuario.getPass()+"&idUsu="+ usuario.getIdUsu()+"\"> >> </a></td>"
 			+"</tr>");
 		}
 		out.println("</table>");
 	}else{
 		out.println("   - = No hay usuarios. = -");
 	}
+%>
+</useradmin:AdminLogged>
+<br> 
+<%
+out.println("<a href=\"" +request.getContextPath()+ "/secured/principal.jsp \"> <button>< VOLVER</button></a>");
 %>
 
 </body>

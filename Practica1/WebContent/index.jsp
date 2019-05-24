@@ -28,7 +28,7 @@ if (request.getAttribute("MSG")!=null){
 	out.println(request.getAttribute("MSG")+"<br>");
 }
 %>
-<form action="ServletLogin" method="POST">
+<form action="<%=request.getContextPath()%>/ServletLogin" method="POST">
 	<fieldset style="background:#e1eff2;">
 	<legend>LOGIN</legend>
 	<p>

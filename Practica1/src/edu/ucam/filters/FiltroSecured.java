@@ -10,6 +10,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import edu.ucam.servlets.ServletLogin;
+
 /**
  * Servlet Filter implementation class FiltroSecured
  */
@@ -35,7 +37,7 @@ public class FiltroSecured implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		if((request instanceof HttpServletRequest) && (((HttpServletRequest)request).getSession().getAttribute("USUARIO_LOGED") == null) ) {
+		if((request instanceof HttpServletRequest) && (((HttpServletRequest)request).getSession().getAttribute(ServletLogin.USUARIO_LOGED) == null) ) {
 			request.setAttribute("MSG", "Haga LOGIN para acceder");
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 		}

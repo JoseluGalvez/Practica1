@@ -9,11 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>MODIFICAR</title>
 </head>
-<body>
+<body bgcolor="#f7fff1">
 <%@ include file="cabecera.jsp"%>
 <%
 //Recuperamos del contexto la lista de los cultivos
 	Hashtable <String, Cultivo> cultivos = (Hashtable <String, Cultivo>)request.getServletContext().getAttribute("ATR_CULTIVOS");
+//Compruebo si existe
+	boolean exist=cultivos.containsKey(request.getParameter("idCul"));
+	if(exist == false){
+		out.println("El cultivo que desea modificar no existe, puede que haya sido eliminado por otro usuario. <br><a href=\""+request.getContextPath()+"/secured/listCultivo.jsp \">  Volver</a><br>");
+	}else {
 //recupero el cultivo a modificar
 	Cultivo cultivo = cultivos.get(request.getParameter("idCul"));
 %>
@@ -29,8 +34,11 @@
 	</p>
 	</fieldset>	
 	<p>
-	<input type="submit" value="MODIFICAR">
+	<input type="submit" value="~ MODIFICAR">
 	</p>
 	</form><br><br>
+<% //VOLVER
+out.println("<a href=\"" +request.getContextPath()+ "/secured/listCultivo.jsp \"><button>< VOLVER</button></a>");
+}%>
 </body>
 </html>

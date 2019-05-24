@@ -27,6 +27,11 @@ public class DeleteCultivoAction extends Action {
 			// Comprobamos si existe ese ID
 		    if(cultivos.containsKey(idCul)) {
 		    	cultivos.remove(idCul);
+		    	
+				//Incremento cantidad de cultivos eliminados por usuario actual en esta sesion
+				int contDelCul = (int)request.getSession().getAttribute("CUL_DEL");
+				request.getSession().setAttribute("CUL_DEL", ++contDelCul);
+		    	
 				request.setAttribute("MSG", "Cultivo ["+idCul+"] eliminado");
 		    }else {
 			request.setAttribute("MSG", "Cultivo ["+idCul+"] no encontrado");

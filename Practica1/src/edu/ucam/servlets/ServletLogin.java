@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import edu.ucam.beans.Usuario;
 
-//import edu.ucam.actions.Action;
-//import edu.ucam.actions.AddAction;
+
 
 /**
  * Servlet implementation class ServletLogin
@@ -19,6 +19,7 @@ import edu.ucam.beans.Usuario;
 @WebServlet("/ServletLogin")
 public class ServletLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String USUARIO_LOGED = "USUARIO_LOGED";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -37,7 +38,7 @@ public class ServletLogin extends HttpServlet {
 		getServletContext().setAttribute("ATR_CONTFIN", contFin);
 		getServletContext().setAttribute("ATR_CONTCUL", contCul);
 
-	//Creamos el primer usuario Administrador para poder acceder
+		//Creamos el primer usuario Administrador para poder acceder
 		String idUsu = "admin";
 
 		Usuario admin = new Usuario (idUsu, "Admin", "Istrator", "admin", true);
@@ -71,8 +72,16 @@ public class ServletLogin extends HttpServlet {
 		    	if(usuarios.get(idUsu).getPass().equals(pass)) {
 		    		// Usuario y pass correctos
 		    		Usuario user = usuarios.get(idUsu);
-		    		request.getSession().setAttribute("USUARIO_LOGED", user);
+		    		request.getSession().setAttribute(USUARIO_LOGED, user);
 		    		jsp = "/secured/principal.jsp"; //jsp de respuesta Logueado
+		    		
+		    		//inicializo contadores de la etiqueta LOG
+		    		int contAddCul=0, contDelCul=0, contAddFin=0, contDelFin=0;
+		    		request.getSession().setAttribute("CUL_ADD", contAddCul);
+		    		request.getSession().setAttribute("CUL_DEL", contDelCul);
+		    		request.getSession().setAttribute("FIN_ADD", contAddFin);
+		    		request.getSession().setAttribute("FIN_DEL", contDelFin);
+		    		
 		    	}else {
 					request.setAttribute("MSG", "Contraseña incorrecta");
 		    	}

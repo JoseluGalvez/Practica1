@@ -41,6 +41,11 @@ public class AddCultivoAction extends Action {
 			    }else {
 					// Añado a la lista el cultivo creado con los parámetros recibidos (atributos)
 					cultivos.put(idCul, cultivo);
+					
+					//Incremento cantidad de cultivos añadidos por usuario actual en esta sesion
+					int contAddCul = (int)request.getSession().getAttribute("CUL_ADD");
+					request.getSession().setAttribute("CUL_ADD", ++contAddCul);
+					
 					request.setAttribute("MSG", "Cultivo ["+idCul+"] añadido.");
 			    }
 				return jsp;			
